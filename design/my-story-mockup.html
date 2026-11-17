@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Story — Murali (design mockup v2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF7; --ink:#141414; --muted:#6b6b66; --faint:#a3a39c; --line:#e4e3dc;
+    --accent:#6D28D9; --accent-tint:#f3eefc;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'Inter', system-ui, sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:650px;margin:0 auto;padding:0 24px}
+
+  /* ---------- nav ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:20;background:var(--bg);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+  nav .in{max-width:1040px;margin:0 auto;padding:28px 32px;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-weight:600;font-size:16px;letter-spacing:-.01em}
+  .logo span{color:var(--accent)}
+  .links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  .links a.active{color:var(--ink);font-weight:500;position:relative}
+  .links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--accent);border-radius:2px}
+
+  /* ---------- intro (100vh) ---------- */
+  .intro{height:100vh;min-height:560px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:90px 24px 40px;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .label{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+  h1{font-size:64px;line-height:1.05;letter-spacing:-.035em;font-weight:700;margin:14px 0 24px}
+  .lede{font-size:22px;line-height:1.55;color:#2a2a28;letter-spacing:-.01em;max-width:580px}
+  .scroll{margin-top:64px;display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--ink);cursor:pointer}
+  .scroll .txt{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase}
+  .mouse{width:26px;height:40px;border:1.6px solid var(--ink);border-radius:14px;position:relative}
+  .mouse::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--accent);animation:wheel 1.6s var(--ease) infinite}
+  .chev{width:10px;height:10px;border-right:1.6px solid var(--faint);border-bottom:1.6px solid var(--faint);transform:rotate(45deg);margin-top:-6px;animation:bob 1.6s var(--ease) infinite}
+  @keyframes wheel{0%{opacity:0;transform:translateY(-3px)}30%{opacity:1}100%{opacity:0;transform:translateY(10px)}}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(45deg)}50%{transform:translateY(5px) rotate(45deg)}}
+
+  /* ---------- reading state ---------- */
+  body.reading nav{opacity:0;transform:translateY(-100%);pointer-events:none}
+  body.reading .intro{opacity:0;transform:translateY(-60px)}
+
+  /* ---------- story ---------- */
+  .story{padding:40px 0 0}
+  .ch{padding:14vh 0 0;scroll-margin-top:12vh}
+  .ch:first-child{padding-top:8vh}
+  .year{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+  h2{font-size:30px;letter-spacing:-.025em;font-weight:600;margin:6px 0 14px;line-height:1.25}
+  .ch p{color:#34342f;font-size:18px}
+
+  .ph{margin-top:28px;width:320px;max-width:100%;aspect-ratio:4/3;border:1px dashed #c9c8bf;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--faint);font-family:var(--mono);font-size:11.5px;text-align:center;padding:16px;
+      background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(0,0,0,.022) 10px 20px)}
+  .fork{margin-top:26px;display:block;max-width:100%;height:auto}
+
+  .card{margin-top:28px;display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:#fff;transition:.2s}
+  .card:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .card .t{font-weight:600;font-size:16px;line-height:1.4}
+  .card .s{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:2px}
+  .card .cta{font-size:14px;color:var(--accent);font-weight:500;white-space:nowrap}
+
+  .ch.next .box{background:var(--accent-tint);border-left:2px solid var(--accent);border-radius:0 12px 12px 0;padding:24px 28px}
+  .ch.next .year{color:var(--accent);font-weight:500}
+  .ch.next p{color:#2a2340}
+
+  .currently{margin-top:16vh;border:1px solid var(--line);border-radius:14px;padding:26px 28px;background:#fff}
+  .currently .label{margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .currently .label b{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;box-shadow:0 0 0 3px var(--accent-tint)}
+  .row{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15.5px}
+  .row:first-of-type{border-top:0}
+  .row span:first-child{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+  .row .tbd{color:var(--faint)}
+
+  .closing{padding:110px 0 100px}
+  .closing h3{font-size:30px;letter-spacing:-.025em;font-weight:600;margin-bottom:22px}
+  .closing .cl{display:flex;gap:30px;flex-wrap:wrap;font-size:16px;font-weight:500}
+  .closing .cl a{border-bottom:1px solid var(--line);padding-bottom:3px}
+  .closing .cl a:first-child{color:var(--accent);border-color:var(--accent)}
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;font-family:var(--mono);font-size:12px;color:var(--faint);display:flex;justify-content:space-between}
+
+  /* ---------- chapter index (desktop) ---------- */
+  .index{position:fixed;left:max(32px, calc(50% - 325px - 250px));top:50%;transform:translate(-12px,-50%);z-index:15;width:200px;opacity:0;pointer-events:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+  body.reading .index{opacity:1;transform:translate(0,-50%);pointer-events:auto}
+  .index .label{display:block;margin-bottom:18px;font-size:11px}
+  .index ol{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .index a{display:block;position:relative;padding:7px 0 7px 18px;color:var(--faint);transition:color .25s}
+  .index a::before{content:"";position:absolute;left:0;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--line);transition:.25s}
+  .index a .y{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.03em;line-height:1.4}
+  .index a .n{display:block;font-size:14px;line-height:1.35}
+  .index a:hover{color:var(--ink)}
+  .index a.active{color:var(--accent)}
+  .index a.active .n{font-weight:600}
+  .index a.active::before{background:var(--accent);width:10px;height:2px;margin-top:-1px;border-radius:2px;left:-2px}
+  .index a.done{color:var(--muted)}
+  .index a.done::before{background:var(--muted)}
+
+  /* soft fade at top of viewport while reading */
+  .topfade{position:fixed;top:0;left:0;right:0;height:56px;z-index:14;pointer-events:none;background:linear-gradient(var(--bg) 35%,rgba(250,250,247,0));opacity:0;transition:opacity .4s}
+  body.reading .topfade{opacity:1}
+  /* ---------- mobile chapter bar ---------- */
+  .mbar{display:none}
+
+  @media (max-width:1060px){ .index{display:none} }
+  @media (max-width:1060px){
+    .mbar{display:flex;position:fixed;top:12px;left:50%;z-index:15;transform:translate(-50%,-80px);opacity:0;transition:opacity .4s var(--ease),transform .4s var(--ease);
+      align-items:center;gap:10px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:999px;padding:8px 14px 8px 12px;box-shadow:0 4px 18px rgba(20,20,20,.07);white-space:nowrap;max-width:calc(100% - 32px)}
+    .topfade{height:84px}
+    body.reading .mbar{transform:translate(-50%,0);opacity:1}
+    .mbar .num{font-family:var(--mono);font-size:11px;color:#fff;background:var(--accent);border-radius:999px;padding:2px 8px}
+    .mbar .y{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+    .mbar .n{font-size:14px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis}
+    .mbar .prog{position:absolute;left:14px;right:14px;bottom:-1px;height:2px;border-radius:2px;background:transparent;overflow:hidden}
+    .mbar .prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+  }
+  @media (max-width:640px){
+    body{font-size:16px}
+    nav .in{padding:20px;flex-direction:column;align-items:flex-start;gap:10px}
+    .links{gap:18px;font-size:13.5px}
+    h1{font-size:46px}
+    .lede{font-size:19px}
+    .scroll{margin-top:52px}
+    .ch{scroll-margin-top:84px}
+    h2{font-size:25px}
+    .ch p{font-size:17px}
+    .card{flex-direction:column;align-items:flex-start;gap:10px}
+    .row{grid-template-columns:100px 1fr;gap:12px}
+    .currently{padding:22px 20px}
+    .closing{padding:80px 0 70px}
+    .closing h3{font-size:25px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav><div class="in">
+  <a class="logo" href="#">Murali<span>.</span></a>
+  <div class="links">
+    <a href="#">Home</a><a class="active" href="#">Story</a><a href="#">Work</a><a href="#">Writing</a><a href="#">Contact</a>
+  </div>
+</div></nav>
+
+<!-- Desktop chapter index -->
+<aside class="index" aria-label="Chapters">
+  <span class="label">Chapters</span>
+  <ol>
+    <li><a href="#c1"><span class="y">[year]</span><span class="n">Two sparks</span></a></li>
+    <li><a href="#c2"><span class="y">[year]</span><span class="n">The pause</span></a></li>
+    <li><a href="#c3"><span class="y">[year]</span><span class="n">The crossroads</span></a></li>
+    <li><a href="#c4"><span class="y">[year]</span><span class="n">Building things</span></a></li>
+    <li><a href="#c5"><span class="y">[year] – now</span><span class="n">The real world</span></a></li>
+    <li><a href="#c6"><span class="y">Next</span><span class="n">Where I'm heading</span></a></li>
+  </ol>
+</aside>
+
+<div class="topfade"></div>
+<!-- Mobile chapter pill -->
+<div class="mbar" aria-live="polite"><span class="num">1/6</span><span class="y">[year]</span><span class="n">Two sparks</span><span class="prog"><i></i></span></div>
+
+<section class="intro">
+  <div class="label">My Story</div>
+  <h1>My Story</h1>
+  <p class="lede">I'm Murali. I started out making things in Blender, and I'm working toward building the tools behind animated films.</p>
+  <a class="scroll" href="#c1" aria-label="Scroll to read">
+    <span class="txt">Scroll to read</span>
+    <span class="mouse"></span>
+    <span class="chev"></span>
+  </a>
+</section>
+
+<main class="wrap">
+  <section class="story">
+    <article class="ch" id="c1" data-y="[year]" data-n="Two sparks">
+      <div class="year">[year]</div>
+      <h2>Two sparks</h2>
+      <p>During my BTech in Electronics and Communications, I met the core ideas of computers and programming. Around the same time, I opened Blender and got hooked: modelling 3D objects, lighting them, and rendering them into my own showreel.</p>
+      <div class="ph">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>
+        Early Blender render (placeholder)
+      </div>
+    </article>
+
+    <article class="ch" id="c2" data-y="[year]" data-n="The pause">
+      <div class="year">[year]</div>
+      <h2>The pause</h2>
+      <p>After graduating, I took a year to step back and figure out which direction I really wanted to go.</p>
+    </article>
+
+    <article class="ch" id="c3" data-y="[year]" data-n="The crossroads">
+      <div class="year">[year]</div>
+      <h2>The crossroads</h2>
+      <p>I had two paths in front of me: a master's in Design at an IIT, or a master's in Computer Science in Birmingham. I chose Computer Science and moved to the UK.</p>
+      <svg class="fork" width="320" height="150" viewBox="0 0 320 150" font-family="JetBrains Mono, monospace" font-size="13" aria-label="Fork: Design at IIT or Computer Science in Birmingham">
+        <circle cx="8" cy="75" r="5" fill="#141414"/>
+        <path d="M8 75 H50" stroke="#141414" stroke-width="1.5"/>
+        <path d="M50 75 C90 75 96 26 140 26 H156" stroke="#c9c8bf" stroke-width="1.5" fill="none" stroke-dasharray="4 5"/>
+        <circle cx="160" cy="26" r="4" fill="#FAFAF7" stroke="#a3a39c" stroke-width="1.5"/>
+        <text x="174" y="30" fill="#a3a39c">Design · IIT</text>
+        <path d="M50 75 C90 75 96 124 140 124 H156" stroke="#6D28D9" stroke-width="2.5" fill="none"/>
+        <circle cx="160" cy="124" r="5" fill="#6D28D9"/>
+        <text x="174" y="120" fill="#6D28D9" font-weight="500">Computer Science</text>
+        <text x="174" y="137" fill="#6D28D9" font-weight="500">· Birmingham</text>
+      </svg>
+    </article>
+
+    <article class="ch" id="c4" data-y="[year]" data-n="Building things">
+      <div class="year">[year]</div>
+      <h2>Building things</h2>
+      <p>During my master's, I built a prototype AI companion to support primary school students, my first real taste of designing technology for people.</p>
+      <a class="card" href="#">
+        <div><div class="t">AI Companion for Primary Students</div><div class="s">University prototype</div></div>
+        <span class="cta">Read case study →</span>
+      </a>
+    </article>
+
+    <article class="ch" id="c5" data-y="[year] – now" data-n="The real world">
+      <div class="year">[year] – now</div>
+      <h2>The real world</h2>
+      <p>After graduating, I worked part-time in convenience stores and on contract on production lines. In my spare time, I kept learning frontend and full-stack development, and the foundations of computer graphics programming, using AI tools as my study partners.</p>
+    </article>
+
+    <article class="ch next" id="c6" data-y="Next" data-n="Where I'm heading">
+      <div class="box">
+        <div class="year">Next</div>
+        <h2>Where I'm heading</h2>
+        <p>I want to bring my two sparks back together as a computer graphics and pipeline developer, building the tools that help studios make films, with full-stack skills alongside.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="currently">
+    <div class="label"><b></b>Currently</div>
+    <div class="row"><span>Building</span><span class="tbd">[what you're building]</span></div>
+    <div class="row"><span>Learning</span><span class="tbd">[what you're learning]</span></div>
+    <div class="row"><span>Looking for</span><span>Graphics / pipeline developer roles</span></div>
+  </section>
+
+  <section class="closing">
+    <h3>Want to see what I've made?</h3>
+    <div class="cl"><a href="#">Work →</a><a href="#">Learning Log →</a><a href="#">Contact →</a></div>
+  </section>
+
+  <footer><span>© [year] Murali B</span><span>Design mockup v2</span></footer>
+</main>
+
+<script>
+/* Mockup behaviour: intro -> reading state, and active chapter tracking */
+(function(){
+  var body=document.body, chs=[].slice.call(document.querySelectorAll('.ch')),
+      links=[].slice.call(document.querySelectorAll('.index a')),
+      bar=document.querySelector('.mbar');
+  function onScroll(){ body.classList.toggle('reading', window.scrollY > window.innerHeight*0.35); }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  function setActive(i){
+    links.forEach(function(a,j){ a.classList.toggle('active',j===i); a.classList.toggle('done',j<i); });
+    var c=chs[i]; bar.querySelector('.num').textContent=(i+1)+'/'+chs.length;
+    bar.querySelector('.y').textContent=c.dataset.y; bar.querySelector('.n').textContent=c.dataset.n;
+    bar.querySelector('.prog i').style.width=((i+1)/chs.length*100)+'%';
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) setActive(chs.indexOf(e.target)); });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  chs.forEach(function(c){io.observe(c)});
+  setActive(0);
+})();
+</script>
+</body>
+</html>

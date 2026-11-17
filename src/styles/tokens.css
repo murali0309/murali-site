@@ -1,0 +1,128 @@
+/**
+ * Design tokens from design/my-story-mockup.html
+ * Colours, fonts, type scale, spacing, motion.
+ */
+:root {
+  /* ---------- colour ---------- */
+  --bg: #fafaf7;
+  --ink: #141414;
+  --muted: #6b6b66;
+  --faint: #a3a39c;
+  --line: #e4e3dc;
+  --accent: #6d28d9;
+  --accent-tint: #f3eefc;
+
+  --text-lede: #2a2a28;
+  --text-body: #34342f;
+  --text-next: #2a2340;
+  --surface: #ffffff;
+  --dash: #c9c8bf;
+  --surface-glass: rgba(255, 255, 255, 0.92);
+  --shadow-soft: rgba(20, 20, 20, 0.07);
+
+  /* ---------- fonts ---------- */
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ---------- font sizes ---------- */
+  --text-xs: 11px;
+  --text-xs-plus: 11.5px;
+  --text-caption: 12px;
+  --text-caption-plus: 12.5px;
+  --text-sm: 14px;
+  --text-sm-tight: 13.5px;
+  --text-base-sm: 15.5px;
+  --text-base: 16px;
+  --text-md: 17px;
+  --text-lg: 18px;
+  --text-lede: 22px;
+  --text-lede-sm: 19px;
+  --text-h2: 30px;
+  --text-h2-sm: 25px;
+  --text-h1: 64px;
+  --text-h1-sm: 46px;
+
+  /* ---------- font weights ---------- */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ---------- letter spacing ---------- */
+  --tracking-tightest: -0.035em;
+  --tracking-tighter: -0.025em;
+  --tracking-tight: -0.01em;
+  --tracking-year: 0.04em;
+  --tracking-index: 0.03em;
+  --tracking-scroll: 0.14em;
+  --tracking-label: 0.16em;
+
+  /* ---------- line heights ---------- */
+  --leading-display: 1.05;
+  --leading-tight: 1.25;
+  --leading-snug: 1.35;
+  --leading-card: 1.4;
+  --leading-lede: 1.55;
+  --leading-body: 1.75;
+
+  /* ---------- spacing ---------- */
+  --space-1: 2px;
+  --space-2: 3px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-5: 10px;
+  --space-6: 12px;
+  --space-7: 14px;
+  --space-8: 16px;
+  --space-9: 18px;
+  --space-10: 20px;
+  --space-11: 22px;
+  --space-12: 24px;
+  --space-13: 26px;
+  --space-14: 28px;
+  --space-15: 30px;
+  --space-16: 32px;
+  --space-17: 40px;
+  --space-18: 52px;
+  --space-19: 56px;
+  --space-20: 64px;
+  --space-21: 70px;
+  --space-22: 80px;
+  --space-23: 84px;
+  --space-24: 90px;
+  --space-25: 100px;
+  --space-26: 110px;
+
+  /* layout widths */
+  --wrap-max: 650px;
+  --nav-max: 1040px;
+  --lede-max: 580px;
+  --media-width: 320px;
+  --index-width: 200px;
+  --row-label: 130px;
+  --row-label-sm: 100px;
+
+  /* vertical rhythm (viewport-relative) */
+  --ch-pad-top: 14vh;
+  --ch-pad-top-first: 8vh;
+  --ch-scroll-margin: 12vh;
+  --currently-offset: 16vh;
+  --intro-min-height: 560px;
+  --topfade-height: 56px;
+  --topfade-height-sm: 84px;
+
+  /* ---------- radii ---------- */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* ---------- motion ---------- */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-fast: 0.2s;
+  --duration: 0.25s;
+  --duration-med: 0.3s;
+  --duration-slow: 0.4s;
+  --duration-slower: 0.5s;
+  --duration-slowest: 0.6s;
+}
